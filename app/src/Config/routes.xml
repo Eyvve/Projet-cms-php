@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<routes>
+    <route path="/" action="homepage" controller="PostController"/>
+    <route path="comment" action="show" controller="CommentController" params="id"/>
+    <route path="user" action="author" controller="UserController"/>
+</routes>
