@@ -5,8 +5,8 @@ namespace App\Controller;
 abstract class BaseController
 {
 
-    private $templateFile = __DIR__ . './../Views/template.php';
-    private $viewsDir = __DIR__ . './../Views/Frontend/';
+    private $templateFile = __DIR__ . './../../Views/template.php';
+    private $viewsDir = __DIR__ . './../../Views/Frontend/';
     private $params;
 
     public function __construct (string $action, array $params=[])
@@ -14,20 +14,19 @@ abstract class BaseController
         $this ->params = $params;
 
         $method = 'execute' . ucfirst($action);
-        echo $method. "Le constructeur fonctionne depuis Controller";
         if (is_callable([$this, $method])){
-            $this->$method;
+            // TODO - à mediter
+            $this->$method();
         }
     }
 
-    public function render(string $template, array $arguments)
+    public function render(string $template, array $arguments, string $title)
     {
         $view = $this->viewsDir . $template;
 
         foreach ($arguments as $key => $value){
             ${$key} = $value;
         }
-
         ob_start();
         require $view;
         $content = ob_get_clean();

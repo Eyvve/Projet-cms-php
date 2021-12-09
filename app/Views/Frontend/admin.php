@@ -9,8 +9,16 @@
 </head>
 <body>
 
-<?= $content ?>
-
 </body>
 </html>
 <?php
+
+//foreach ($users as $user){
+//    echo $user;
+//}
+
+
+
+var_dump($users);
+
+echo 'coucouqdszedzezedzed';

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<routes>
+    <route path="homepage" action="getAllPosts" controller="PostController"/>
+    <route path="admin" action="getAllUsers" controller="UserController"/>
+    <route path="comment" action="show" controller="CommentController" params="id"/>
+    <route path="user" action="author" controller="UserController"/>
+<!--    <route path="/" action="getPostsByUser" controller="PostController"/>-->
+<!--    <route path="/" action="getPostById" controller="PostController"/>-->
+<!--    <route path="/" action="createPost" controller="PostController"/>-->
+<!--    <route path="/" action="deletePost" controller="PostController"/>-->
+<!--    <route path="/" action="updatePost" controller="PostController"/>-->
+
+</routes>

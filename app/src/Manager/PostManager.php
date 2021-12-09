@@ -8,22 +8,28 @@ class PostManager extends BaseManager
     /**
      * @return Post[]
      */
-    public function getAllPost()
+    public function getAllPosts()
     {
-
-        $stmt = $this->pdo->prepare("SELECT * FROM post");
+        $stmt = $this->pdo->prepare("SELECT * FROM post JOIN user ON post.userId = user.userID;");
         $stmt->execute();
         $query = $stmt->fetchAll();
-        var_dump($query);
+        return $query;
     }
 
     /**
      * @param Post $post
      * @return Post/bool
      */
-    public function createPost(Post $post)
+    public function getAllPostsByUser(Post $post)
     {
-
+        $stmt = $this->pdo->prepare("SELECT * FROM post where userId = :id  ");
+        $stmt->execute(
+            [
+                "id" => $userId,
+            ]
+        );
+        $query = $stmt->fetchAll();
+        var_dump($query);
         return true;
     }
     /**
