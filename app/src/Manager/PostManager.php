@@ -5,6 +5,17 @@ use App\Entity\Post;
 
 class PostManager extends BaseManager
 {
+    public array $data;
+
+
+    public function setHydratePost($data)
+    {
+        ;
+        if(empty($data)){
+            $data = new Post($this->getAllPosts());
+        }
+        return $data;
+    }
     /**
      * @return Post[]
      */
@@ -20,12 +31,12 @@ class PostManager extends BaseManager
      * @param Post $post
      * @return Post/bool
      */
-    public function getAllPostsByUser(Post $post)
+    public function getAllPostsByUser(int $userId)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM post where userId = :id  ");
+        $stmt = $this->pdo->prepare("SELECT * FROM post where userId = :userId  ");
         $stmt->execute(
             [
-                "id" => $userId,
+                "userId" => $userId,
             ]
         );
         $query = $stmt->fetchAll();
@@ -33,12 +44,17 @@ class PostManager extends BaseManager
         return true;
     }
     /**
-     * @param Post $post
+     * @param Post $postId
      * @return Post/bool
      */
     public function deletePost(Post $post)
     {
-
+        $stmt = $this->pdo->prepare("DELETE FROM `post` WHERE `post`.`postId` = :postId;");
+        $stmt->execute(
+            [
+                "postId" => $post->getPostId(),
+            ]
+        );
         return true;
     }
     /**
@@ -47,6 +63,14 @@ class PostManager extends BaseManager
      */
     public function updatePost(Post $post)
     {
+        $stmt = $this->pdo->prepare("UPDATE `post` SET `content` = 'str', `updatedate` = 'datetime' 
+WHERE `post`.`postId` = :userId");
+        $stmt->execute(
+            [
+                "userId" => $post->getUserId(),
+            ]
+        );
+
 
         return true;
     }

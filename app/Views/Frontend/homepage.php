@@ -2,18 +2,23 @@
 
 <?php
 
+var_dump($hydratePost);
 
-foreach ($posts as $post){
+
+foreach ($hydratePost as $post){
     ?>
     <div>
-<!--        <p>--><?php //var_dump($post)?><!--</p>-->
-        <p><?=$post['userName']?></p>
+        <p><?php var_dump($delete)?></p>
+        <p><?=$post['username']?></p>
         <p><?=$post['content']?></p>
         <p><?=$post['date']?></p>
+        <button onclick="<?=$delete?>" > Commentaires </button>
         <hr>
     </div>
 
 <?php }?>
+
+
 
 
 

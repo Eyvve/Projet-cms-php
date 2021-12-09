@@ -18,12 +18,18 @@ class PostController extends BaseController
     {
         $postManager = new PostManager(PDOFactory::getMysqlConnection());
         $posts = $postManager->getAllPosts();
+        $hydratePost = $postManager->setHydratePost($posts);
+        $delete = $postManager->deletePost($hydratePost);
+
 
         $this->render(
             'homepage.php',
             [
+                "delete" => $delete,
                 'posts' => $posts,
-                'test' => "Tous les posts sont affichés"
+                'hydratePost' => $hydratePost,
+                'test' => "Tous les posts sont affichés",
+
             ],
             'homepage'
         );
