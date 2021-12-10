@@ -1,0 +1,15 @@
+{
+    "name": "zd/zedaz",
+    "autoload": {
+        "psr-4": {
+            "Zd\\Zedaz\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bentaniamin1",
+            "email": "amin.bentani@hetic.net"
+        }
+    ],
+    "require": {}
+}
