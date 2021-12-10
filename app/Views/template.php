@@ -8,6 +8,18 @@
     <title><?= $title ?></title>
 </head>
 <body>
+<p>Yosh</p>
+<?php if (\App\Fram\Utils\Flash::hasFlash('success')): ?>
+    <div class="alert alert-success" role="alert">
+        <?= \App\Fram\Utils\Flash::getFlash('success'); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (\App\Fram\Utils\Flash::hasFlash('alert')): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= \App\Fram\Utils\Flash::getFlash('alert'); ?>
+    </div>
+<?php endif; ?>
 
 <?= $content ?>
 

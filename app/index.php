@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 use App\Controller\PostController;
 //var_dump($_SERVER['REQUEST_URI']);die;
 //var_dump($_GET['p']);die;

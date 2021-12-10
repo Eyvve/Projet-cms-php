@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Fram\Factory\PDOFactory;
+use App\Fram\Utils\Flash;
 use App\Manager\PostManager;
 
 class PostController extends BaseController
@@ -14,12 +15,12 @@ class PostController extends BaseController
 
     // TODO faire tous les phpdocs de toutes les actions
 
+
     public function executeGetAllPosts()
     {
         $postManager = new PostManager(PDOFactory::getMysqlConnection());
         $posts = $postManager->getAllPosts();
-        $hydratePost = $postManager->setHydratePost($posts);
-        $delete = $postManager->deletePost($hydratePost);
+        var_dump($_POST["id"]);
 
 
         $this->render(
@@ -27,9 +28,7 @@ class PostController extends BaseController
             [
                 "delete" => $delete,
                 'posts' => $posts,
-                'hydratePost' => $hydratePost,
-                'test' => "Tous les posts sont affichés",
-
+                'test' => "Tous les posts sont affichés"
             ],
             'homepage'
         );
@@ -52,20 +51,23 @@ class PostController extends BaseController
 
     }
 
-    public function executeDeletePost()
+    public function executeDeletePostById()
     {
+        //echo "coucou";
+        //Flash::setFlash('alert','coucou '.$_POST['postId']);
+        $postId = (int)($_POST['postId']);
+        var_dump($postId);
         $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $btnDeletePost = $postManager->createPost();
+        $postManager->deletePost($postId);
 
-
-        $this->render(
+        /*$this->render(
             'homepage.php',
             [
-                'posts' => $btnDeletePost,
-                'test' => "Suppression de post"
+                'test1' => "Suppression de post jjj"
             ], 'Homepage'
-        );
-
+        );*/
+        header('Location: homepage');
+        exit();
     }
 
     public function executeUpdatePost()

@@ -15,7 +15,8 @@ class UserController extends BaseController
     public function executeGetAllUsers()
     {
         $userManager = new UserManager(PDOFactory::getMysqlConnection());
-        $users = $userManager->getAllUsers();
+        $users = $userManager->setHydrateUser();
+        $users = json_encode($users);
 
 
         $this->render(

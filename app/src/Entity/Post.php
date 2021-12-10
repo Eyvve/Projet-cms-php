@@ -4,8 +4,8 @@ namespace App\Entity;
 
 class Post
 {
-    private int $postId;
-    private string $username;
+    public int $postId;
+    public string $username;
     private int $userId;
     private string $content;
     private \DateTime $date;
@@ -93,37 +93,9 @@ class Post
         $this->content = $content;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getDate(): \DateTime
-    {
-        return $this->date;
-    }
 
-    /**
-     * @param \DateTime $date
-     */
-    public function setDate(\DateTime $date): void
-    {
-        $this->date = $date;
-    }
 
-    /**
-     * @return \DateTime
-     */
-    public function getUpdateDate(): \DateTime
-    {
-        return $this->updateDate;
-    }
 
-    /**
-     * @param \DateTime $updateDate
-     */
-    public function setUpdateDate(\DateTime $updateDate): void
-    {
-        $this->updateDate = $updateDate;
-    }
 
 
 

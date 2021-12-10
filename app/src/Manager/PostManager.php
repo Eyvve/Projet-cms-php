@@ -2,72 +2,66 @@
 
 namespace App\Manager;
 use App\Entity\Post;
+use PDO;
 
 class PostManager extends BaseManager
 {
-    public array $data;
+    private $data;
 
 
-    public function setHydratePost($data)
-    {
-        ;
-        if(empty($data)){
-            $data = new Post($this->getAllPosts());
-        }
-        return $data;
-    }
     /**
      * @return Post[]
      */
     public function getAllPosts()
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM post JOIN user ON post.userId = user.userID;");
+        $stmt = $this->pdo->prepare("SELECT * FROM post JOIN user ON post.userId = user.userId");
         $stmt->execute();
-        $query = $stmt->fetchAll();
-        return $query;
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
+        $postquery = $stmt->fetchAll();
+        return $postquery;
     }
 
     /**
      * @param Post $post
      * @return Post/bool
      */
-    public function getAllPostsByUser(int $userId)
+    public function getAllPostsByUser(Post $post)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM post where userId = :userId  ");
+        $stmt = $this->data->prepare("SELECT * FROM post where userId = :userId  ");
         $stmt->execute(
             [
-                "userId" => $userId,
+                "userId" => $post->getPostId(),
             ]
         );
-        $query = $stmt->fetchAll();
+        $query = $stmt->fetch(PDO::FETCH_ASSOC);
         var_dump($query);
         return true;
     }
-    /**
-     * @param Post $postId
-     * @return Post/bool
-     */
-    public function deletePost(Post $post)
+
+
+    public function deletePost($id)
     {
-        $stmt = $this->pdo->prepare("DELETE FROM `post` WHERE `post`.`postId` = :postId;");
-        $stmt->execute(
-            [
-                "postId" => $post->getPostId(),
-            ]
-        );
-        return true;
+         $stmt = $this->pdo->prepare("DELETE FROM post WHERE postId = :postId ");
+         $stmt->execute(
+             [
+                 ":postId" => $id
+             ]
+
+         );
+
+
     }
     /**
      * @param Post $post
      * @return Post/bool
      */
-    public function updatePost(Post $post)
+    public function updatePost($id)
     {
         $stmt = $this->pdo->prepare("UPDATE `post` SET `content` = 'str', `updatedate` = 'datetime' 
 WHERE `post`.`postId` = :userId");
         $stmt->execute(
             [
-                "userId" => $post->getUserId(),
+                "userId" => $id,
             ]
         );
 

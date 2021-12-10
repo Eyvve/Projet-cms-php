@@ -4,6 +4,9 @@
     <route path="homepage" action="getAllPosts" controller="PostController"/>
     <route path="admin" action="getAllUsers" controller="UserController"/>
     <route path="comment" action="show" controller="CommentController" params="id"/>
+
+    <route path="deletePost" action="deletePostById" controller="PostController"/>
+
     <route path="user" action="author" controller="UserController"/>
 <!--    <route path="/" action="getPostsByUser" controller="PostController"/>-->
 <!--    <route path="/" action="getPostById" controller="PostController"/>-->
